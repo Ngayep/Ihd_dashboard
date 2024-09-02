@@ -7,5 +7,20 @@
 </head>
 <body>
     <h1>Welcome to the Health Dashboard</h1>
+    <h2>Health Data</h2>
+
+     <ul>
+    {% for item in data %}
+        <li>
+            Sample ID: {{ item['Sample ID'] }}<br>
+            Date of Birth: {{ item['Date of Birth'] }}<br>
+            Had Malaria in the Past Months?: {{ item['has had malaria in the past x months?'] }}<br>
+            Has Taken Treatment: {{ item['has taken treatment (yes/no)'] }}<br>
+            Status: {{ item['Alive or dead from malaria?'] }}
+        </li>
+        <br>
+    {% endfor %}
+    </ul>
+
 </body>
 </html>
