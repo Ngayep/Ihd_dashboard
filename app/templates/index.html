@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Dashboard</title>
+    <title>IHealth Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Welcome to the Health Dashboard</h1>
-    <h2>Health Data</h2>
+    <h1>IHealth Dashboard</h1>
 
-     <ul>
-    {% for item in data %}
-        <li>
-            Sample ID: {{ item['Sample ID'] }}<br>
-            Date of Birth: {{ item['Date of Birth'] }}<br>
-            Had Malaria in the Past Months?: {{ item['has had malaria in the past x months?'] }}<br>
-            Has Taken Treatment: {{ item['has taken treatment (yes/no)'] }}<br>
-            Status: {{ item['Alive or dead from malaria?'] }}
-        </li>
-        <br>
-    {% endfor %}
-    </ul>
+    <div id="status-chart"></div>
+    <div id="treatment-chart"></div>
 
+    <script>
+        fetch('/visualizations')
+        .then(response => response.json())
+        .then(data => {
+            // Render the status chart
+            const statusChart = JSON.parse(data.status_chart);
+            Plotly.newPlot('status-chart', statusChart.data, statusChart.layout);
+
+            // Render the treatment chart
+            const treatmentChart = JSON.parse(data.treatment_chart);
+            Plotly.newPlot('treatment-chart', treatmentChart.data, treatmentChart.layout);
+        })
+        .catch(error => console.error('Error loading visualizations:', error));
+    </script>
 </body>
 </html>
+
