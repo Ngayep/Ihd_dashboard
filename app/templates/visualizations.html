@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualizations</title>
+</head>
+<body>
+    <h1>Health Data Visualizations</h1>
+
+    <h2>Prevalence: Alive vs Dead Patients</h2>
+    <img src="{{ fig_prevalence }}" alt="Prevalence Chart">
+
+    <h2>Malaria Incidence</h2>
+    <img src="{{ fig_incidence }}" alt="Malaria Incidence Chart">
+
+    <h2>Hospitalizations Over Time</h2>
+    <div>
+        {{ fig_hospitalization|safe }}
+    </div>
+
+</body>
+</html>
