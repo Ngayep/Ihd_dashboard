@@ -1,11 +1,7 @@
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import pandas as pd
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///malaria_dashboard.db'
-db = SQLAlchemy(app)
-
+# Import the db instance from the create_app function
+from . import db
 
 # Define Patient Model
 class Patient(db.Model):
@@ -34,8 +30,3 @@ class Hospitalization(db.Model):
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     hospitalization_date = db.Column(db.Date, nullable=False)
     status = db.Column(db.String(50), nullable=False)
-
-# Create all the tables in the database
-db.create_all()
-
-

@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Visualizations</title>
+    <title>Malaria Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Health Data Visualizations</h1>
+    <h1>Malaria Dashboard</h1>
 
-    <h2>Prevalence: Alive vs Dead Patients</h2>
-    <img src="{{ fig_prevalence }}" alt="Prevalence Chart">
+    <div id="status-chart"></div>
+    <div id="treatment-chart"></div>
 
-    <h2>Malaria Incidence</h2>
-    <img src="{{ fig_incidence }}" alt="Malaria Incidence Chart">
+    <script>
+        fetch('/visualizations')
+        .then(response => response.json())
+        .then(data => {
+            // Render the status chart
+            const statusChart = JSON.parse(data.status_chart);
+            Plotly.newPlot('status-chart', statusChart.data, statusChart.layout);
 
-    <h2>Hospitalizations Over Time</h2>
-    <div>
-        {{ fig_hospitalization|safe }}
-    </div>
-
+            // Render the treatment chart
+            const treatmentChart = JSON.parse(data.treatment_chart);
+            Plotly.newPlot('treatment-chart', treatmentChart.data, treatmentChart.layout);
+        })
+        .catch(error => console.error('Error loading visualizations:', error));
+    </script>
 </body>
 </html>

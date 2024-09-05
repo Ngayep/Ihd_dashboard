@@ -1,99 +1,78 @@
 from flask import Blueprint, render_template, jsonify
 import pandas as pd
-import matplotlib.pyplot as plt
-import io
-import base64
-from flask import Flask
-from . import db
-from .models import Patient, MalariaIncidence, Hospitalization
 import plotly.express as px
+from . import db
+from .models import Patient
 
 main = Blueprint('main', __name__)
+
+def populate():
+    """Load data from the CSV file and populate the database."""
+    csv_file = 'data/Malaria_data_1000.csv'
+    df = pd.read_csv(csv_file)
+
+    for _, row in df.iterrows():
+        try:
+            patient = Patient(
+                sample_id=row['Sample ID'],
+                dob=pd.to_datetime(row['Date of Birth'], format='%Y-%m-%d'),
+                malaria_history=row['Has had malaria in the past x months?'],
+                treatment=row['Has taken treatment'],
+                status=row['Alive or dead from malaria?']
+            )
+            db.session.add(patient)
+        except Exception as e:
+            print(f"Error processing row: {row['Sample ID']} - {str(e)}")
+
+    db.session.commit()
+    return "Database populated successfully!"
+
+
+def fetch_data():
+    """Fetch data from the database for visualization or display."""
+    patients = Patient.query.all()
+    data = []
+    for patient in patients:
+        data.append({
+            'sample_id': patient.sample_id,
+            'dob': patient.dob.strftime('%Y-%m-%d'),
+            'malaria_history': patient.malaria_history,
+            'treatment': patient.treatment,
+            'status': patient.status
+        })
+
+    df = pd.DataFrame(data)
+    return df
 
 
 @main.route('/')
 def index():
-    """Route for the index page with basic data rendering."""
+    """Route for the index page."""
     data = fetch_data()
     return render_template('index.html', data=data)
 
 
 @main.route('/visualizations')
 def visualizations():
-    """Route for displaying all visualizations."""
-    # Data for prevalence and incidence
-    patients = Patient.query.all()
-    hospitalizations = Hospitalization.query.all()
+    """Route for data visualizations."""
+    df = fetch_data()
 
-    # Prevalence Chart: Patients who are alive
-    alive_count = Patient.query.filter_by(status="Alive").count()
-    dead_count = Patient.query.filter_by(status="Dead").count()
+    # Generate a bar chart for Malaria Incidence vs Status
+    status_chart = px.bar(df, x='malaria_history', color='status', barmode='group',
+                          title="Malaria History vs Status")
 
-    fig_prevalence = plot_prevalence(alive_count, dead_count)
+    # Generate a pie chart for Treatment Distribution
+    treatment_chart = px.pie(df, names='treatment', title="Treatment Distribution")
 
-    # Incidence Chart: Malaria occurrences
-    malaria_positive_count = Patient.query.filter(Patient.malaria_history.contains("Yes")).count()
-    malaria_negative_count = Patient.query.filter(Patient.malaria_history.contains("No")).count()
+    # Convert the figures to JSON for frontend rendering
+    status_chart_json = status_chart.to_json()
+    treatment_chart_json = treatment_chart.to_json()
 
-    fig_incidence = plot_incidence(malaria_positive_count, malaria_negative_count)
-
-    # Hospitalization Chart: Frequency of hospitalizations
-    fig_hospitalization = plot_hospitalization(hospitalizations)
-
-    return render_template(
-        'visualizations.html',
-        fig_prevalence=fig_prevalence,
-        fig_incidence=fig_incidence,
-        fig_hospitalization=fig_hospitalization
-    )
+    return jsonify({'status_chart': status_chart_json, 'treatment_chart': treatment_chart_json})
 
 
-def plot_prevalence(alive_count, dead_count):
-    """Generate a bar chart for prevalence of alive vs dead patients."""
-    fig, ax = plt.subplots()
-    ax.bar(['Alive', 'Dead'], [alive_count, dead_count], color=['green', 'red'])
-    ax.set_title('Prevalence of Alive vs Dead Patients')
-
-    return save_plot(fig)
-
-
-def plot_incidence(positive_count, negative_count):
-    """Generate a bar chart for malaria incidence (Yes/No history)."""
-    fig, ax = plt.subplots()
-    ax.bar(['Malaria History', 'No Malaria History'], [positive_count, negative_count], color=['blue', 'gray'])
-    ax.set_title('Malaria Incidence')
-
-    return save_plot(fig)
-
-
-def plot_hospitalization(hospitalizations):
-    """Generate a bar chart for hospitalizations."""
-    dates = [h.hospitalization_date for h in hospitalizations]
-    status = [h.status for h in hospitalizations]
-
-    df = pd.DataFrame({'date': dates, 'status': status})
-    fig = px.histogram(df, x="date", color="status", title="Hospitalization Over Time")
-
-    return fig.to_html(full_html=False)
-
-
-def save_plot(fig):
-    """Save the plot as a base64 encoded string for rendering."""
-    buf = io.BytesIO()
-    fig.savefig(buf, format="png")
-    buf.seek(0)
-    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8')
-    buf.close()
-
-    return f"data:image/png;base64,{image_base64}"
-
-
-def fetch_data():
-    """Fetch all the patient and malaria-related data."""
-    patients = Patient.query.all()
-    malaria_incidences = MalariaIncidence.query.all()
-
-    return {
-        "patients": patients,
-        "incidences": malaria_incidences
-    }
+@main.route('/populate')
+def trigger_population():
+    """Route to manually trigger the population of the database."""
+    result = populate()
+    return result
