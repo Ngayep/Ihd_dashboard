@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malaria Dashboard</title>
+    <title>Health Dashboard - Home</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <h1>Malaria Dashboard</h1>
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/visualizations">Visualization</a></li>
+        </ul>
+    </nav>
 
-    <h2>Overview</h2>
-    <p>Welcome to the Malaria Dashboard. Here you can find various data visualizations and summaries related to malaria cases.</p>
-
-    <h2>Patient Data</h2>
-    <p><a href="{{ url_for('main.index') }}">View detailed patient data</a></p>
-
-    <h2>Data Visualizations</h2>
-    <p><a href="{{ url_for('main.visualizations') }}">View visualizations</a></p>
-
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the Health Dashboard</h1>
+        <p>This interactive health dashboard provides real-time insights into public health data, focusing on Malaria and AIDS in Cameroon. You can explore various charts and graphs that display data on disease prevalence, incidence rates, and hospitalization trends.</p>
+        <p>The goal of this dashboard is to offer researchers, public health officials, and the general public a user-friendly platform to access, analyze, and visualize key health metrics in the region.</p>
+    </div>
+    <div>
+	    <li><a href="/">Home</a></li>
+            <li><a href="/visualizations">Visualization</a></li>
+    </div>
 </body>
 </html>

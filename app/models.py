@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 # Import the db instance from the create_app function
 from . import db
 
+
 # Define Patient Model
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)

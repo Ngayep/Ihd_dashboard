@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizations</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	    <title>Health Dashboard - Visualizations</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <div id="status-chart"></div>
-    <div id="treatment-chart"></div>
+    <!-- Navigation Menu -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/visualizations">Visualizations</a></li>
+        </ul>
+    </nav>
 
-    <script type="text/javascript">
-        // Render the status chart
-        var statusChart = {{ status_chart_json | safe }};
-        Plotly.newPlot('status-chart', statusChart);
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Health Data Visualization</h1>
 
-        // Render the treatment chart
-        var treatmentChart = {{ treatment_chart_json | safe }};
-        Plotly.newPlot('treatment-chart', treatmentChart);
-    </script>
+        <!-- Render the charts directly from the Jinja variables -->
+        <h2>Prevalence Over Time</h2>
+        <div>{{ prevalence_html | safe }}</div>
+
+        <h2>Incidence Over Time</h2>
+        <div>{{ incidence_html | safe }}</div>
+
+        <h2>Mortality Distribution</h2>
+        <div>{{ mortality_html | safe }}</div>
+    </div>
 </body>
 </html>
