@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>Health Dashboard - Visualizations</title>
+    <title>Health Dashboard - Visualizations</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
@@ -16,18 +16,24 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="content">
-        <h1>Health Data Visualization</h1>
+    <main>
+        <div class="content">
+            <h1>Health Data Visualization</h1>
 
-        <!-- Render the charts directly from the Jinja variables -->
-        <h2>Prevalence Over Time</h2>
-        <div>{{ prevalence_html | safe }}</div>
+            <!-- Render the charts directly from the Jinja variables -->
+            <h2>Prevalence Over Time</h2>
+            <div>{{ prevalence_html | safe }}</div>
 
-        <h2>Incidence Over Time</h2>
-        <div>{{ incidence_html | safe }}</div>
+            <h2>Incidence Over Time</h2>
+            <div>{{ incidence_html | safe }}</div>
 
-        <h2>Mortality Distribution</h2>
-        <div>{{ mortality_html | safe }}</div>
-    </div>
+            <h2>Mortality Distribution</h2>
+            <div>{{ mortality_html | safe }}</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Health Dashboard</p>
+    </footer>
 </body>
 </html>

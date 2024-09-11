@@ -3,27 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Dashboard - Home</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>My Portfolio Project</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Menu -->
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/visualizations">Visualization</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="content">
-        <h1>Welcome to the Health Dashboard</h1>
-        <p>This interactive health dashboard provides real-time insights into public health data, focusing on Malaria and AIDS in Cameroon. You can explore various charts and graphs that display data on disease prevalence, incidence rates, and hospitalization trends.</p>
-        <p>The goal of this dashboard is to offer researchers, public health officials, and the general public a user-friendly platform to access, analyze, and visualize key health metrics in the region.</p>
-    </div>
-    <div>
-	    <li><a href="/">Home</a></li>
-            <li><a href="/visualizations">Visualization</a></li>
-    </div>
+    <header>
+        <h1>Welcome to My Portfolio Project</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#project">My Project</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Tell your story here. Share your background, skills, and experiences as a developer.</p>
+    </section>
+    <section id="project">
+        <h2>My Project</h2>
+        <p>Provide details about your project. What does it do? What technologies did you use? Include a link to your deployed app and GitHub repository.</p>
+        <a href="https://your-deployed-app-url.com">View the App</a>
+        <a href="https://github.com/yourusername/your-repo">View on GitHub</a>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Provide a way for visitors to reach you. You can include a simple form or just your contact information.</p>
+        <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
 </body>
 </html>

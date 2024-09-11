@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, request, redirect, url_for
+import csv
 import pandas as pd
 import plotly.express as px
 from . import db
@@ -56,10 +57,24 @@ def fetch_data():
 
 
 @main.route('/')
-def index():
-    """Route for the index page."""
+def home():
+    """Route for the home page."""
     data = fetch_data()
-    return render_template('index.html', data=data)
+    return render_template('home.html', data=data)
+
+
+@main.route('/submit_contact', methods=['POST'])
+def submit_contact():
+    name = request.form['name']
+    email = request.form['email']
+    job_title = request.form['job_title']
+ 
+    # Save to CSV file
+    with open('contacts.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([name, email, job_title])
+
+    return redirect(url_for('main.home'))
 
 
 @main.route('/visualizations')

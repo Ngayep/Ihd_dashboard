@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard - Home</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation Menu -->
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/visualizations">Visualization</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Main Content -->
+        <div class="content">
+            <h1>Welcome to the Health Dashboard</h1>
+            <p>This interactive health dashboard provides real-time insights into public health data, focusing on Malaria and AIDS in Cameroon.</p>
+            <p>You can explore various charts and graphs that display data on disease prevalence, incidence rates, and hospitalization trends.</p>
+            <p>The goal of this dashboard is to offer researchers, public health officials, and the general public a user-friendly platform to access, analyze, and visualize key health metrics in the region.</p>
+        </div>
+
+        <!-- Contact Form -->
+        <section>
+            <h2>Contact Us</h2>
+            <form action="{{ url_for('main.submit_contact') }}" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="job_title">Job Title:</label>
+                <input type="text" id="job_title" name="job_title" required><br><br>
+
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Health Dashboard</p>
+    </footer>
+</body>
+</html>
