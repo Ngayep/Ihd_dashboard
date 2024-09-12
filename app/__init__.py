@@ -8,7 +8,7 @@ def create_app():
     app = Flask(__name__)
 
     # Set up the configuration
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///malaria_dashboard.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(BASE_DIR, 'malaria_dashboard.db')}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize the database with the app
