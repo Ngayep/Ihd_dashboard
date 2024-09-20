@@ -1,9 +1,43 @@
-Interactive Health Dashboard - Malaria Incidence and Prevalence in Cameroon
+Interactive Health Dashboard :Visualizing Malaria Data in Cameroon
+
+Introduction
+
+Inspiration is often born from necessity. In my case, the necessity was clear: the need for accessible and interactive malaria data to support public health decision-making in Cameroon. As a data enthusiast with a passion for health, I embarked on this project to create a user-friendly dashboard that visualizes real-time data about malaria. This project started as a personal curiosity but quickly evolved into something much larger. I wanted to build a tool that could help researchers, healthcare workers, and policymakers understand trends and act on real data.
 
 
 Project Overview
 
 This project is an interactive health dashboard aimed at visualizing public health data, specifically focusing on Malaria incidence, prevalence, and mortality rates in Cameroon. The dashboard enables users to view real-time data trends through intuitive charts and graphs, making it a valuable tool for researchers, public health officials, and stakeholders in understanding and combatting malaria.
+
+Inspiration & Vision
+
+The concept of this project came from my fascination with how data can be used to tackle real-world problems. The burden of malaria in my home country, Cameroon, was my driving force. I envisioned a tool that could break down large data, enable analysis, and make sense of malaria trends to support health professionals.
+
+But there were challenges, of course.
+Challenges I Faced:
+
+    Data Collection and Cleaning: The malaria data I had was scattered across multiple CSV files, each with different structures and inconsistencies. Handling missing data and ensuring accuracy was a major part of my early process.
+    Choosing the Right Visualization Tools: I experimented with various libraries—Plotly, Seaborn, and finally Matplotlib—before settling on static image rendering. Though dynamic charts were appealing, I learned that sometimes simplicity (and performance) wins.
+    Backend-Frontend Integration: Ensuring the smooth integration between my Flask app and the frontend was tricky at first. Passing data from the backend to the frontend and rendering accurate, real-time visualizations took many iterations.
+
+Technology & Architecture
+Technology Stack:
+
+    Backend: Flask – Python-based web framework that serves data from CSV files for real-time analysis.
+    Data Processing: Pandas – Used for data manipulation.
+    Visualization: Matplotlib – Generates static images of charts (e.g., incidence, prevalence, and hospitalization rates).
+    Frontend: HTML5, CSS3, Bootstrap – For building a responsive and clean interface.
+    Database: CSV files – Malaria data is stored in CSV files, which are processed using Pandas.
+
+Application Architecture:
+
+The application’s architecture is designed for simplicity and efficiency. Here’s how data flows through the app:
+
+    CSV Data Ingestion: CSV files containing malaria data are uploaded.
+    Data Cleaning & Transformation: Using Pandas, the data is cleaned and structured into usable formats. This includes handling missing values, filtering by date etc. I chose Pandas for its powerful data manipulation capabilities.
+    Flask Backend: The Flask app serves the cleaned data and responds to API requests for visualization.
+    Visualization Generation: Matplotlib generates static charts from the data, which are then rendered in the frontend. Initially, I considered using dynamic visualizations with Plotly, but after testing, I found that static images using Matplotlib provided the best performance and clarity. This trade-off was necessary for a fast and smooth user experience.
+    Frontend Rendering: HTML and CSS display the static images, ensuring smooth performance without the overhead of dynamic charts.
 
 Key Features:
 
@@ -11,12 +45,6 @@ Key Features:
     Incidence Tracking: Tracks the number of new malaria cases across different time periods.
     Mortality Distribution: Provides a visual breakdown of the mortality rate due to malaria.
 
-Technologies Used:
-
-    Backend: Flask (Python) – for routing and server-side logic.
-    Data Processing: Pandas – for manipulating and aggregating data.
-    Data Visualization: Plotly Express – for generating interactive charts (line charts, bar charts, pie charts).
-    Frontend: HTML, CSS, JavaScript – for creating user interfaces and displaying charts.
 
 How It Works:
     Data Fetching: The application reads malaria-related data from a CSV file that includes columns such as Date of Birth (dob), malaria history (malaria_history), and the status of individuals (alive or dead).
@@ -63,11 +91,14 @@ Possible Improvements
 
 Usage
 
-The dashboard provides visualizations for:
+The dashboard allows users to explore malaria data with the following:
 
     Prevalence of Malaria: Number of malaria cases over time.
     Incidence Rate: Number of new malaria cases within a specified period.
     Mortality Rate: Deaths due to malaria over time.
+
+Note: To update the data, simply upload new CSV files containing malaria statistics, and the application will automatically process and display the updated data.
+
 
 Features:
 
@@ -90,5 +121,6 @@ Feel free to open issues or pull requests if you would like to contribute to the
     Then create a pull request
 
 AUTHOR: Tcheumadji Ngayep Jessica Chancel
+Project Blog article: https://link.medium.com/lCth1eVyZMb
 linkedIn: https://www.linkedin.com/in/jessica-chancel-tcheumadji-ngayep-1a7a8372/
 Twitter: https://x.com/CourtesyofJess
