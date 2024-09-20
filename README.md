@@ -19,42 +19,43 @@ Technologies Used:
     Frontend: HTML, CSS, JavaScript – for creating user interfaces and displaying charts.
 
 How It Works:
-
     Data Fetching: The application reads malaria-related data from a CSV file that includes columns such as Date of Birth (dob), malaria history (malaria_history), and the status of individuals (alive or dead).
-
     Prevalence Calculation: The prevalence chart is created by calculating how many individuals in the dataset are still alive over time, grouped by the date of birth.
-
     Incidence Calculation: Incidence is calculated by counting the number of new cases of malaria (based on malaria_history) in each time period (grouped by year and month).
-
     Mortality Distribution: A pie chart is generated to show the percentage of people who have died from malaria compared to those still alive.
-
     Visualization: The charts (prevalence, incidence, and mortality) are rendered using Plotly Express and displayed dynamically on the visualization page.
 
 How to Run the Project locally, follow these steps:
+
 Prerequisites
     Python 3.8+
     Flask
     Pandas
     Plotly Express
 Steps
+
 Clone the repository:
-git clone https://github.com/Ngayep/Ihd_dashboard.git
-cd Ihd_dashboard
+
+  git clone https://github.com/Ngayep/Ihd_dashboard.git
+  cd Ihd_dashboard
 
 Set up a virtual environment and install dependencies:
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+  python3 -m venv venv
+  source venv/bin/activate
+  pip install -r requirements.txt
 
 Run the Flask application:
-flask run
+ flask run
 
 Open the dashboard in your browser at http://127.0.0.1:5000.
+
 Live Demo: https://ihd-dashboard.onrender.com
+
+
 Possible Improvements
 
-  Data Source Integration: Currently, the dashboard uses a CSV file for data. In the future, it could pull data from APIs or live databases to provide real-time updates.
-  Login and Authentication: Adding user authentication would allow users to save custom data views, making the dashboard more interactive and secure.
+    Data Source Integration: Currently, the dashboard uses a CSV file for data. In the future, it could pull data from APIs or live databases to provide real-time updates.
+    Login and Authentication: Adding user authentication would allow users to save custom data views, making the dashboard more interactive and secure.
     Advanced Filtering: Allowing users to filter data by region, gender, or age would provide more granularity and insights into the malaria data.
     Additional Metrics: The dashboard could be expanded to visualize other health-related metrics such as hospitalization rates or treatment outcomes.
     Mobile Optimization: Improve the dashboard's responsiveness for mobile and tablet users.
@@ -73,7 +74,9 @@ Features:
     Static visualizations generated from real-time data.
     CSV-based data input for easy updates.
     Filter and explore data by date and region.
-    
+   
+    ![Ihdasboard](https://github.com/user-attachments/assets/9f33a2ff-cfbd-4ea2-b103-a61f007a2dae)
+
 Contributing
 
 Feel free to open issues or pull requests if you would like to contribute to the project or suggest new features.
